@@ -1,0 +1,40 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;900&family=Montserrat:ital,wght@1,200;1,300;1,400&family=Pacifico&family=Poppins:ital@0;1&display=swap');
+
+.home-page {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .welcome-message {
+    position: absolute;
+    margin-left: 20px; 
+    top: 50%;
+    left: 0; 
+    transform: translateY(-50%);
+    text-align: left; 
+    color: rgb(19, 19, 19);
+  }
+  
+  .welcome-message h1 {
+    font-size: 6em;
+    margin-bottom: 10px;
+  }
+  
+  .welcome-message p {
+    font-family: 'Pacifico', sans-serif; 
+    font-size: 2.5em;
+    margin: 0;
+  }
+
+  .special-text {
+    font-family: 'Pacifico', sans-serif; 
+    font-size: 2em;
+    font-weight: bold;
+    color: #d23d23; 
+  }
+
+  .logoName{
+    color: #d23d23;
+  }
