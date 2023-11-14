@@ -34,6 +34,9 @@ const AddCar = ({ onAddCar }) => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <h1>
+        Add new car
+      </h1>
       <label>
         Make:
         <input type="text" value={make} onChange={(e) => setMake(e.target.value)} />

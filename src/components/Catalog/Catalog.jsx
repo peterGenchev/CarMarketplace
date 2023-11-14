@@ -6,6 +6,18 @@ const Catalog = () => {
     { make: 'BMW', model: 'X3', year: '2023', image: 'https://di-uploads-pod23.dealerinspire.com/bmwofowingsmills/uploads/2023/02/IMG_05281.jpg' },
     { make: 'Audi', model: 'Q5', year: '2023', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHjh6NC1lryXVmd1Lx1dhvdC7Z2bm28QHn8A&usqp=CAU' },
     { make: 'Mercedes', model: 'GLC', year: '2023', image: 'https://www.autocar.co.uk/sites/autocar.co.uk/files/images/car-reviews/first-drives/legacy/mercedes-benz-glc-coupe-driving-front-3_4.jpg' },
+    { make: 'BMW', model: 'X3', year: '2023', image: 'https://di-uploads-pod23.dealerinspire.com/bmwofowingsmills/uploads/2023/02/IMG_05281.jpg' },
+    { make: 'Audi', model: 'Q5', year: '2023', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHjh6NC1lryXVmd1Lx1dhvdC7Z2bm28QHn8A&usqp=CAU' },
+    { make: 'Mercedes', model: 'GLC', year: '2023', image: 'https://www.autocar.co.uk/sites/autocar.co.uk/files/images/car-reviews/first-drives/legacy/mercedes-benz-glc-coupe-driving-front-3_4.jpg' },
+    { make: 'BMW', model: 'X3', year: '2023', image: 'https://di-uploads-pod23.dealerinspire.com/bmwofowingsmills/uploads/2023/02/IMG_05281.jpg' },
+    { make: 'Audi', model: 'Q5', year: '2023', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHjh6NC1lryXVmd1Lx1dhvdC7Z2bm28QHn8A&usqp=CAU' },
+    { make: 'Mercedes', model: 'GLC', year: '2023', image: 'https://www.autocar.co.uk/sites/autocar.co.uk/files/images/car-reviews/first-drives/legacy/mercedes-benz-glc-coupe-driving-front-3_4.jpg' },
+    { make: 'Mercedes', model: 'GLC', year: '2023', image: 'https://www.autocar.co.uk/sites/autocar.co.uk/files/images/car-reviews/first-drives/legacy/mercedes-benz-glc-coupe-driving-front-3_4.jpg' },
+    { make: 'Mercedes', model: 'GLC', year: '2023', image: 'https://www.autocar.co.uk/sites/autocar.co.uk/files/images/car-reviews/first-drives/legacy/mercedes-benz-glc-coupe-driving-front-3_4.jpg' },
+    { make: 'Mercedes', model: 'GLC', year: '2023', image: 'https://www.autocar.co.uk/sites/autocar.co.uk/files/images/car-reviews/first-drives/legacy/mercedes-benz-glc-coupe-driving-front-3_4.jpg' },
+    { make: 'Mercedes', model: 'GLC', year: '2023', image: 'https://www.autocar.co.uk/sites/autocar.co.uk/files/images/car-reviews/first-drives/legacy/mercedes-benz-glc-coupe-driving-front-3_4.jpg' },
+    { make: 'Mercedes', model: 'GLC', year: '2023', image: 'https://www.autocar.co.uk/sites/autocar.co.uk/files/images/car-reviews/first-drives/legacy/mercedes-benz-glc-coupe-driving-front-3_4.jpg' },
+    { make: 'Mercedes', model: 'GLC', year: '2023', image: 'https://www.autocar.co.uk/sites/autocar.co.uk/files/images/car-reviews/first-drives/legacy/mercedes-benz-glc-coupe-driving-front-3_4.jpg' },
     // Add more cars as needed
   ];
 
@@ -19,7 +31,9 @@ const Catalog = () => {
             <div className="card-content">
               <h2>{car.year} {car.make} {car.model}</h2>
               {/* Additional details can be added here */}
-              <p>Details: ...</p>
+              <button> Details</button>
+              <button> Delete</button>
+              <button> Edit</button>
             </div>
           </li>
         ))}
