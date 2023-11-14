@@ -28,6 +28,9 @@ const Register = () => {
   return (
     <div className="register-container">
       <form className="register-form" onSubmit={handleSubmit}>
+      <h1>
+        REGISTER
+      </h1>
         <label>
           Username:
           <input type="text" value={username} onChange={handleUsernameChange} />

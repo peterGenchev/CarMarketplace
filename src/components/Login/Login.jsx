@@ -24,6 +24,9 @@ const Login = () => {
   return (
     <div className="login-container">
       <form className="login-form" onSubmit={handleSubmit}>
+        <h1>
+          LOGIN
+        </h1>
         <label>
           Username:
           <input type="text" value={username} onChange={handleUsernameChange} />

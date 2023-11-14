@@ -17,6 +17,7 @@ function Navigation() {
                 <Nav.Link as={Link} to="/register">Register</Nav.Link>
                 <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
                 <Nav.Link as={Link} to="/catalog">Catalog</Nav.Link>
+                <Nav.Link as={Link} to="/addCar">Add Car</Nav.Link>
             </Nav>
         </Navbar.Collapse>
     </Container>
