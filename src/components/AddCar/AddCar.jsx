@@ -6,12 +6,13 @@ const AddCar = ({ onAddCar }) => {
   const [make, setMake] = useState('');
   const [model, setModel] = useState('');
   const [year, setYear] = useState('');
+  const [price, setPrice] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Basic validation
-    if (!make || !model || !year) {
+    if (!make || !model || !year || !price) {
       alert('Please fill in all fields');
       return;
     }
@@ -21,6 +22,7 @@ const AddCar = ({ onAddCar }) => {
       make,
       model,
       year,
+      price,
     };
 
     // Pass the new car object to the parent component
@@ -30,6 +32,7 @@ const AddCar = ({ onAddCar }) => {
     setMake('');
     setModel('');
     setYear('');
+    setPrice('');
   };
 
   return (
@@ -52,6 +55,11 @@ const AddCar = ({ onAddCar }) => {
       <label>
         Year:
         <input type="text" value={year} onChange={(e) => setYear(e.target.value)} />
+      </label>
+      
+      <label>
+        Price:
+        <input type="text" value={year} onChange={(e) => setPrice(e.target.value)} />
       </label>
       <br />
 

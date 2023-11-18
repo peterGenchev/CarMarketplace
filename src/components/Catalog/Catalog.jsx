@@ -1,4 +1,6 @@
 import React from 'react';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button'; // Import Button
 import './Catalog.css';
 
 const Catalog = () => {
@@ -22,22 +24,24 @@ const Catalog = () => {
   ];
 
   return (
-    <div className="container">
-      <h1>Car Catalog</h1>
-      <ul className="card-list">
+    <div className="catalog-container">
+      <div className="row">
         {cars.map((car, index) => (
-          <li key={index} className="card">
-            <img src={car.image} alt={`${car.make} ${car.model}`} />
-            <div className="card-content">
-              <h2>{car.year} {car.make} {car.model}</h2>
-              {/* Additional details can be added here */}
-              <button> Details</button>
-              <button> Delete</button>
-              <button> Edit</button>
-            </div>
-          </li>
+          <div key={index} className="col-md-3 mb-4">
+            <Card style={{ width: '100%' }}>
+              <Card.Img variant="top" src={car.image} alt={`${car.make} ${car.model}`} />
+              <Card.Body>
+                <Card.Title>{`${car.make} ${car.model} ${car.year}`}</Card.Title>
+                <Card.Text>
+                  Some quick example text to build on the card title and make up the
+                  bulk of the card's content.
+                </Card.Text>
+                <Button variant="primary">View more</Button>
+              </Card.Body>
+            </Card>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
