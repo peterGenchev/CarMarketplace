@@ -4,10 +4,20 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { getAuth } from '../../firebase'; // Adjust the import path based on your file structure
+import { signOut, auth , getAuth } from '../../firebase'; 
+
 
 function Navigation() {
   const [user] = useAuthState(getAuth());
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      // You may want to redirect the user to the home page or another page after logout
+    } catch (error) {
+      console.error('Logout error:', error.message);
+    }
+  };
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -17,13 +27,14 @@ function Navigation() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
+            <Nav.Link as={Link} to="/catalog">Catalog</Nav.Link>
 
             {/* Conditional rendering based on user authentication */}
             {user ? (
               <>
                 <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
-                <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
-                <Nav.Link as={Link} to="/catalog">Catalog</Nav.Link>
+                <Nav.Link as={Link} to="/addCar">Add Car</Nav.Link>
+                <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
               </>
             ) : (
               <>
@@ -33,7 +44,6 @@ function Navigation() {
             )}
             {/* End of conditional rendering */}
             
-            <Nav.Link as={Link} to="/addCar">Add Car</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
