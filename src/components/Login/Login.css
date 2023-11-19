@@ -33,4 +33,14 @@
     border-radius: 4px;
     cursor: pointer;
   }
+
+  .error-message {
+    color: #dc3545;
+    margin-top: 10px;
+  }
+  
+  .success-message {
+    color: #28a745;
+    margin-top: 10px;
+  }
   
