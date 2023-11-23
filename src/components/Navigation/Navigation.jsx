@@ -4,16 +4,15 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { signOut, auth , getAuth } from '../../firebase'; 
+import { signOut, auth } from '../../firebase'; // Updated import
 
 
 function Navigation() {
-  const [user] = useAuthState(getAuth());
+  const [user] = useAuthState(auth);
 
   const handleLogout = async () => {
     try {
-      await signOut(auth);
-      // You may want to redirect the user to the home page or another page after logout
+      await signOut(auth);  
     } catch (error) {
       console.error('Logout error:', error.message);
     }
@@ -42,8 +41,6 @@ function Navigation() {
                 <Nav.Link as={Link} to="/register">Register</Nav.Link>
               </>
             )}
-            {/* End of conditional rendering */}
-            
           </Nav>
         </Navbar.Collapse>
       </Container>
