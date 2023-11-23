@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getDatabase, ref, get, child } from 'firebase/database';
 import { getStorage, ref as storageRef, getDownloadURL } from 'firebase/storage';
 import app from '../../firebase';
@@ -54,6 +55,9 @@ const Catalog = () => {
               <h2>{`${car.make} ${car.model}`}</h2>
               <p>Year: {car.year}</p>
               <p>Price: ${car.price}</p>
+              <Link to={`/details/${car.id}`}>
+                <button className="details-button">Details</button>
+              </Link>
             </div>
           </li>
         ))}
