@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { getDatabase, ref, push } from 'firebase/database';
+import { getDatabase, ref, push, set } from 'firebase/database';
 import { useNavigate } from 'react-router-dom';
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import app from '../../firebase';
-
-// ... (imports and other code)
+import './AddCar.css'; // Import the CSS file for styling
 
 const AddCar = () => {
   const [make, setMake] = useState('');
@@ -72,37 +71,30 @@ const AddCar = () => {
     }
   };
 
-  // ... (rest of the component)
-
   return (
-    <div>
+    <div className="add-car-container">
       <h2>Add Car</h2>
-      <form>
+      <form className="add-car-form">
         <label>
           Make:
           <input type="text" value={make} onChange={(e) => setMake(e.target.value)} />
         </label>
-        <br />
         <label>
           Model:
           <input type="text" value={model} onChange={(e) => setModel(e.target.value)} />
         </label>
-        <br />
         <label>
           Year:
           <input type="number" value={year} onChange={(e) => setYear(e.target.value)} />
         </label>
-        <br />
         <label>
           Price:
           <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} />
         </label>
-        <br />
         <label>
           Image:
           <input type="file" accept="image/*" onChange={handleImageChange} />
         </label>
-        <br />
         <button type="button" onClick={handleAddCar}>
           Add Car
         </button>
@@ -110,6 +102,5 @@ const AddCar = () => {
     </div>
   );
 };
-
 
 export default AddCar;
