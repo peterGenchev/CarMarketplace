@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { getDatabase, ref, push } from 'firebase/database';
+import { useNavigate } from 'react-router-dom';
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import app from '../../firebase';
+
+// ... (imports and other code)
 
 const AddCar = () => {
   const [make, setMake] = useState('');
@@ -9,6 +12,8 @@ const AddCar = () => {
   const [year, setYear] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState(null);
+
+  const navigate = useNavigate();
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -34,12 +39,7 @@ const AddCar = () => {
       const carsRef = ref(database, 'cars');
 
       // Push the new car data to the 'cars' node in the database
-      const newCarRef = push(carsRef, {
-        make,
-        model,
-        year,
-        price,
-      });
+      const newCarRef = push(carsRef);
 
       // Upload the image to Firebase Storage
       const storage = getStorage(app);
@@ -49,9 +49,13 @@ const AddCar = () => {
       // Get the URL of the uploaded image
       const imageUrl = await getDownloadURL(imageRef);
 
-      // Update the car data with the image URL
-      await newCarRef.update({
-        imageUrl,
+      // Set the car data including the image URL
+      await set(newCarRef, {
+        make,
+        model,
+        year,
+        price,
+        imageUrl, // Include the image URL in the car data
       });
 
       // Reset the form
@@ -62,10 +66,13 @@ const AddCar = () => {
       setImage(null);
 
       console.log('Car added successfully!');
+      navigate('/catalog');
     } catch (error) {
       console.error('Error adding car:', error.message);
     }
   };
+
+  // ... (rest of the component)
 
   return (
     <div>
@@ -103,5 +110,6 @@ const AddCar = () => {
     </div>
   );
 };
+
 
 export default AddCar;
