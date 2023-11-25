@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getDatabase, ref, get } from 'firebase/database';
 import { getStorage, ref as storageRef, getDownloadURL } from 'firebase/storage';
 import app from '../../firebase';
+import './Details.css';
 
 const Details = () => {
   const { id } = useParams();
@@ -53,7 +54,7 @@ const Details = () => {
   }
 
   return (
-    <div>
+    <div  >
       <h1>{`${car.make} ${car.model}`}</h1>
       <img src={car.imageUrl} alt={`${car.make} ${car.model}`} />
       <p>Year: {car.year}</p>

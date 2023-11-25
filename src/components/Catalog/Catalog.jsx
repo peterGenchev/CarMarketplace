@@ -1,35 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getDatabase, ref, get, child } from 'firebase/database';
+import { getDatabase, ref, get } from 'firebase/database';
 import { getStorage, ref as storageRef, getDownloadURL } from 'firebase/storage';
 import app from '../../firebase';
 import './Catalog.css'; // Import your Catalog.css file
 
 const Catalog = () => {
   const [cars, setCars] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const fetchData = async () => {
+    try {
+      const database = getDatabase(app);
+      const carsRef = ref(database, 'cars');
+      const carsSnapshot = await get(carsRef);
+
+      if (carsSnapshot.exists()) {
+        const carsData = carsSnapshot.val();
+        const carsArray = await Promise.all(
+          Object.entries(carsData).map(async ([id, car]) => {
+            const imageUrl = await getImageUrl(id);
+            return { id, imageUrl, ...car };
+          })
+        );
+        setCars(carsArray);
+      }
+    } catch (error) {
+      console.error('Error fetching cars:', error.message);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const database = getDatabase(app);
-        const carsRef = ref(database, 'cars');
-        const carsSnapshot = await get(child(carsRef, '/'));
-
-        if (carsSnapshot.exists()) {
-          const carsData = carsSnapshot.val();
-          const carsArray = await Promise.all(
-            Object.entries(carsData).map(async ([id, car]) => {
-              const imageUrl = await getImageUrl(id);
-              return { id, imageUrl, ...car };
-            })
-          );
-          setCars(carsArray);
-        }
-      } catch (error) {
-        console.error('Error fetching cars:', error.message);
-      }
-    };
-
     fetchData();
   }, []);
 
@@ -44,24 +45,59 @@ const Catalog = () => {
     }
   };
 
+  const handleSearch = () => {
+    // Implement search logic here
+    // Filter the cars based on the entered searchQuery
+    const filteredCars = cars.filter((car) =>
+      car.make.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    // Update the state with the filtered cars
+    setCars(filteredCars);
+  };
+
+  const handleChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const handleClearSearch = () => {
+    // Reset the search query and fetch all cars again
+    setSearchQuery('');
+    fetchData(); // Call the fetchData function here
+  };
+
   return (
     <div className="container">
       <h1>Car Catalog</h1>
-      <ul className="card-list">
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Search by make..."
+          value={searchQuery}
+          onChange={handleChange}
+        />
+        <button className="btn btn-primary" onClick={handleSearch}>
+          Search
+        </button>
+        <button className="btn btn-secondary" onClick={handleClearSearch}>
+          Clear
+        </button>
+      </div>
+      <div className="card-list">
         {cars.map((car) => (
-          <li key={car.id} className="card">
-            <img src={car.imageUrl} alt={`${car.make} ${car.model}`} />
-            <div className="card-content">
-              <h2>{`${car.make} ${car.model}`}</h2>
-              <p>Year: {car.year}</p>
-              <p>Price: ${car.price}</p>
-              <Link to={`/details/${car.id}`}>
-                <button className="details-button">Details</button>
+          <div key={car.id} className="card" style={{ width: '18rem' }}>
+            <img src={car.imageUrl} className="card-img-top" alt={`${car.make} ${car.model}`} />
+            <div className="card-body">
+              <h5 className="card-title">{`${car.make} ${car.model}`}</h5>
+              <p className="card-text">Year: {car.year}</p>
+              <p className="card-text">Price: ${car.price}</p>
+              <Link to={`/details/${car.id}`} className="btn btn-primary">
+                Details
               </Link>
             </div>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

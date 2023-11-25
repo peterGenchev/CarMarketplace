@@ -1,0 +1,31 @@
+.search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px; /* Add margin-top if you want some space from the top */
+  }
+  
+  input {
+    padding: 8px;
+    margin-bottom: 10px; /* Add margin-bottom for spacing between input and button */
+  }
+  
+  button {
+    padding: 8px 12px;
+    background-color: #007bff; /* Change to your desired color */
+    margin-bottom: 30px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  li {
+    margin-bottom: 8px;
+  }
+  
