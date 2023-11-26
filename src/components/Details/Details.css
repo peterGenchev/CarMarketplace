@@ -17,7 +17,7 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
 }
 
 .card h1 {
@@ -34,12 +34,13 @@
 }
 
 .card .details-info {
-  text-align: left; /* Align details to the left */
+  text-align: left;
 }
 
 .card .detail-row p {
-  flex-basis: calc(20% - 10px); /* Adjust the width of each detail */
-  margin-bottom: 10px; /* Add spacing between details */
+  display: flex;
+  flex-basis: calc(20% - 10px);
+  margin-bottom: 20px;
 }
 
 span {
@@ -49,27 +50,37 @@ span {
 }
 
 .card .info {
-  font-family:Georgia, 'Times New Roman', Times, serif;
-  font-weight:normal;
-  font-size:medium;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: normal;
+  font-size: medium;
 }
 
-.card .year {
-  font-size: 18px; /* Adjust the font size for the year */
-  margin-left: 5px; /* Add spacing between "Year:" and the actual year */
-}
-
-.card button {
-  padding: 10px 16px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.card .button-container {
+  display: flex;
+  justify-content: space-between; /* Align buttons with space between them */
   margin-top: 20px;
 }
 
+.card button {
+  flex: 1;
+  margin-left: 10px;
+  padding: 1px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
 .card button:hover {
-  background-color: #0056b3;
+  background-color: #0554a8;
+}
+
+.card button.delete-btn {
+  background-color: #f44336;
+  color: #fff;
+  margin-left: 10px;
+  transition: background-color 0.3s;
+}
+
+.card button.delete-btn:hover {
+  background-color: #d32f2f;
 }
