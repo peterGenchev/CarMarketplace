@@ -7,7 +7,7 @@
   background-image: url('/src/assets/car2.jpg');
   background-size: cover;
   background-position: center;
-  filter: brightness(0.8); 
+  filter: brightness(1); 
   overflow-y: auto;
 }
 

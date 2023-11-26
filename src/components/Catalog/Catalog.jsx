@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getDatabase, ref, get } from 'firebase/database';
+import { getDatabase, ref, get, remove } from 'firebase/database';
 import { getStorage, ref as storageRef, getDownloadURL } from 'firebase/storage';
 import app from '../../firebase';
-import './Catalog.css'; // Import your Catalog.css file
+import './Catalog.css';
 
 const Catalog = () => {
   const [cars, setCars] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [currentUser, setCurrentUser] = useState(null);
 
   const fetchData = async () => {
     try {
@@ -68,20 +69,24 @@ const Catalog = () => {
 
   return (
     <div className="container">
-      <h1>Car Catalog</h1>
+      <h1>Catalog</h1>
       <div className="search-container">
-        <input
-          type="text"
-          placeholder="Search by make..."
-          value={searchQuery}
-          onChange={handleChange}
-        />
-        <button className="btn btn-primary" onClick={handleSearch}>
-          Search
-        </button>
-        <button className="btn btn-secondary" onClick={handleClearSearch}>
-          Clear
-        </button>
+        <div className="input-container">
+          <input
+            type="text"
+            placeholder="Search by make..."
+            value={searchQuery}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="btn-container">
+          <button className="btn btn-primary" onClick={handleSearch}>
+            Search
+          </button>
+          <button className="btn btn-secondary" onClick={handleClearSearch}>
+            Clear
+          </button>
+        </div>
       </div>
       <div className="card-list">
         {cars.map((car) => (

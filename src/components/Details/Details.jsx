@@ -54,17 +54,34 @@ const Details = () => {
   }
 
   return (
-    <div  >
+  <div className="card-container">
+    <div className="card">
       <h1>{`${car.make} ${car.model}`}</h1>
       <img src={car.imageUrl} alt={`${car.make} ${car.model}`} />
-      <p>Year: {car.year}</p>
-      <p>Price: ${car.price}</p>
-      {/* Add more details or components as needed */}
-      
-      {/* Go Back button */}
+      <div className="details-info">
+        <div className="detail-row">
+          <p>
+            <span className="info">Year:</span> <span>{car.year}</span>
+          </p>
+          <p>
+            <span className="info">Price:</span> <span>{car.price} $</span>
+          </p>
+          <p>
+            <span className="info">Fuel:</span> <span>{car.fuel}</span>
+          </p>
+          <p>
+            <span className="info">Mileage:</span> <span>{car.mileage} km.</span>
+          </p>
+          <p>
+            <span className="info">City:</span> <span>{car.city}</span>
+          </p>
+          {/* ... other details ... */}
+        </div>
+      </div>
       <button onClick={goBack}>Go Back</button>
     </div>
-  );
+  </div>
+);
 };
 
 export default Details;

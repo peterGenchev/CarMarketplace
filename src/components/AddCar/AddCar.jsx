@@ -10,6 +10,9 @@ const AddCar = () => {
   const [model, setModel] = useState('');
   const [year, setYear] = useState('');
   const [price, setPrice] = useState('');
+  const [mileage, setMileage] = useState('');
+  const [city, setCity] = useState('');
+  const [fuel, setFuel] = useState('');
   const [image, setImage] = useState(null);
 
   const navigate = useNavigate();
@@ -22,7 +25,7 @@ const AddCar = () => {
   const handleAddCar = async () => {
     try {
       // Validate input
-      if (!make || !model || !year || !price || !image) {
+      if (!make || !model || !year || !price || !image || !fuel || !city || !mileage) {
         console.error('Please fill in all fields and provide an image');
         return;
       }
@@ -54,6 +57,9 @@ const AddCar = () => {
         model,
         year,
         price,
+        mileage,
+        fuel,
+        city,
         imageUrl, // Include the image URL in the car data
       });
 
@@ -62,6 +68,9 @@ const AddCar = () => {
       setModel('');
       setYear('');
       setPrice('');
+      setMileage('');
+      setFuel('');
+      setCity('');
       setImage(null);
 
       console.log('Car added successfully!');
@@ -90,6 +99,18 @@ const AddCar = () => {
         <label>
           Price:
           <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} />
+        </label>
+        <label>
+          Fuel:
+          <input type="text" value={fuel} onChange={(e) => setFuel(e.target.value)} />
+        </label>
+        <label>
+          Mileage:
+          <input type="number" value={mileage} onChange={(e) => setMileage(e.target.value)} />
+        </label>
+        <label>
+          City:
+          <input type="text" value={city} onChange={(e) => setCity(e.target.value)} />
         </label>
         <label>
           Image:
