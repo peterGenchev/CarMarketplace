@@ -8,6 +8,7 @@ import Register from './components/Register/Register';
 import AddCar from './components/AddCar/AddCar';
 import Catalog from './components/Catalog/Catalog';
 import Details from './components/Details/Details';
+import EditCar from './components/Edit/Edit';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path='/addCar' element= {<AddCar/>} />
         <Route path='/catalog' element= {<Catalog/>} />
         <Route path="/details/:id" element={ <Details/> } />
+        <Route path="/edit/:id" element={ <EditCar/> } />
       </Routes>
       
     </div>

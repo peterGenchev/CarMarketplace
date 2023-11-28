@@ -1,7 +1,7 @@
 // Details.js
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getDatabase, ref, get } from 'firebase/database';
+import { getDatabase, ref, get, update } from 'firebase/database';
 import { getStorage, ref as storageRef, getDownloadURL } from 'firebase/storage';
 import app from '../../firebase';
 import EditCar from '../Edit/Edit';
@@ -58,11 +58,22 @@ const Details = () => {
     setIsEditing(false);
   };
 
-  const handleSaveEdit = (editedCar) => {
-    // Implement save edit logic here
-    console.log('Saving edited car:', editedCar);
-    setIsEditing(false);
-    // You may want to update the car details after saving the edit
+  const handleSaveEdit = async (editedCar) => {
+    try {
+      const database = getDatabase(app);
+      const carRef = ref(database, `cars/${id}`);
+      
+      // Update the car details in the database
+      await update(carRef, editedCar);
+
+      setIsEditing(false);
+
+      // If needed, you can fetch and update the car details again
+      // to reflect the changes in the UI
+      // await fetchCarDetails();
+    } catch (error) {
+      console.error('Error saving edited car:', error.message);
+    }
   };
 
   if (!car) {
@@ -70,34 +81,35 @@ const Details = () => {
   }
 
   return (
-<div className="card-container">
+    <div className="card-container">
       <div className="card">
         <h1>{`${car.make} ${car.model}`}</h1>
         <img src={car.imageUrl} alt={`${car.make} ${car.model}`} />
         <div className="details-info">
-  <p>
-    <span className="info">Year:</span> <span>{car.year}</span>
-  </p>
-  <p>
-    <span className="info">Price:</span> <span>{car.price}</span>
-  </p>
-  <p>
-    <span className="info">Fuel:</span> <span>{car.fuel}</span>
-  </p>
-  <p>
-    <span className="info">Mileage:</span> <span>{car.mileage}</span>
-  </p>
-  <p>
-    <span className="info">City:</span> <span>{car.city}</span>
-  </p>
-</div>
+          <p>
+            <span className="info">Year:</span> <span>{car.year}</span>
+          </p>
+          <p>
+            <span className="info">Price:</span> <span>{car.price} $</span>
+          </p>
+          <p>
+            <span className="info">City:</span> <span>{car.city}</span>
+          </p>
+          <p>
+            <span className="info">Fuel:</span> <span>{car.fuel}</span>
+          </p>
+          <p>
+            <span className="info">Mileage:</span> <span>{car.mileage} km</span>
+          </p>
+          {/* Add more paragraphs for other properties */}
+        </div>
         <div className="button-container">
           <button onClick={goBack}>Go Back</button>
           <button onClick={handleEdit}>Edit</button>
         </div>
       </div>
+      {isEditing && <EditCar car={car} onCancel={handleCancelEdit} onSave={handleSaveEdit} />}
     </div>
-  
   );
 };
 

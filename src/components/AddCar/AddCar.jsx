@@ -3,7 +3,7 @@ import { getDatabase, ref, push, set } from 'firebase/database';
 import { useNavigate } from 'react-router-dom';
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import app from '../../firebase';
-import './AddCar.css'; // Import the CSS file for styling
+import './AddCar.css';
 
 const AddCar = () => {
   const [make, setMake] = useState('');

@@ -22,6 +22,18 @@ const EditCar = ({ car, onCancel, onSave }) => {
           Make:
           <input type="text" name="make" value={editedCar.make} onChange={handleInputChange} />
         </label>
+        <label>
+          Model:
+          <input type="text" name="model" value={editedCar.model} onChange={handleInputChange} />
+        </label>
+        <label>
+          Year:
+          <input type="number" name="year" value={editedCar.year} onChange={handleInputChange} />
+        </label>
+        <label>
+          City:
+          <input type="text" name="city" value={editedCar.city} onChange={handleInputChange} />
+        </label>
         {/* Add more input fields for other properties */}
       </form>
       <div className="edit-buttons">
