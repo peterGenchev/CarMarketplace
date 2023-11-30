@@ -1,16 +1,14 @@
 // Details.js
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getDatabase, ref, get, update } from 'firebase/database';
-import { getStorage, ref as storageRef, getDownloadURL } from 'firebase/storage';
+import { getDatabase, ref, get, remove } from 'firebase/database';
+import { getStorage, ref as storageRef, deleteObject, getDownloadURL } from 'firebase/storage';
 import app from '../../firebase';
-import EditCar from '../Edit/Edit';
 import './Details.css';
 
 const Details = () => {
   const { id } = useParams();
   const [car, setCar] = useState(null);
-  const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,34 +44,34 @@ const Details = () => {
     }
   };
 
-  const goBack = () => {
-    navigate('/catalog');
+  const handleDelete = async () => {
+    const userConfirmed = window.confirm('Are you sure you want to delete this car?');
+  
+    if (userConfirmed) {
+      try {
+        const database = getDatabase(app);
+        const carRef = ref(database, `cars/${id}`);
+        await remove(carRef);
+  
+        // Delete image from storage
+        const storage = getStorage(app);
+        const imageRef = storageRef(storage, `carImages/${id}`);
+        await deleteObject(imageRef);
+  
+        navigate('/catalog');
+      } catch (error) {
+        console.error('Error deleting car:', error.message);
+      }
+    }
   };
+  
 
   const handleEdit = () => {
-    setIsEditing(true);
+    navigate(`/edit/${id}`);
   };
 
-  const handleCancelEdit = () => {
-    setIsEditing(false);
-  };
-
-  const handleSaveEdit = async (editedCar) => {
-    try {
-      const database = getDatabase(app);
-      const carRef = ref(database, `cars/${id}`);
-      
-      // Update the car details in the database
-      await update(carRef, editedCar);
-
-      setIsEditing(false);
-
-      // If needed, you can fetch and update the car details again
-      // to reflect the changes in the UI
-      // await fetchCarDetails();
-    } catch (error) {
-      console.error('Error saving edited car:', error.message);
-    }
+  const goBack = () => {
+    navigate('/catalog');
   };
 
   if (!car) {
@@ -106,9 +104,9 @@ const Details = () => {
         <div className="button-container">
           <button onClick={goBack}>Go Back</button>
           <button onClick={handleEdit}>Edit</button>
+          <button className='delete-btn' onClick={handleDelete}>Delete</button>
         </div>
       </div>
-      {isEditing && <EditCar car={car} onCancel={handleCancelEdit} onSave={handleSaveEdit} />}
     </div>
   );
 };
