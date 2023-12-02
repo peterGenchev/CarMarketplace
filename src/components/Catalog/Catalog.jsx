@@ -95,7 +95,7 @@ const Catalog = () => {
             <div className="card-body">
               <h5 className="card-title">{`${car.make} ${car.model}`}</h5>
               <p className="card-text">Year: {car.year}</p>
-              <p className="card-text">Price: ${car.price}</p>
+              <p className="card-text">Price: {car.price} $</p>
               <Link to={`/details/${car.id}`} className="btn btn-primary">
                 Details
               </Link>

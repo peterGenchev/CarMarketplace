@@ -5,29 +5,28 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { signOut, auth } from '../../firebase'; // Updated import
-
+import './Navigation.css'; // Import the CSS file for styling
 
 function Navigation() {
   const [user] = useAuthState(auth);
 
   const handleLogout = async () => {
     try {
-      await signOut(auth);  
+      await signOut(auth);
     } catch (error) {
       console.error('Logout error:', error.message);
     }
   };
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className="transparent-navbar">
       <Container>
-        <Navbar.Brand as={Link} to="/">CarMarket</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Brand as={Link} to="/" className="brand-text">CarMarket</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" className="navbar-toggler" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
+          <Nav className="ml-auto"> {/* Change from 'me-auto' to 'ml-auto' to align to the right */}
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/catalog">Catalog</Nav.Link>
-          
 
             {/* Conditional rendering based on user authentication */}
             {user ? (

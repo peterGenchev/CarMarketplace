@@ -1,0 +1,36 @@
+/* Customize the styles according to your preference */
+.container {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  background-color: transparent;
+}
+
+.transparent-navbar {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.navbar-toggler {
+  background-color: #007BFF;
+}
+
+.brand-text {
+  font-size: 1.5em;
+  font-weight: bolder;
+  color: #b8cce2;
+}
+
+
+.nav-link {
+  transition: color 1.3s ease-in-out;
+  font-weight: 13px; /* Make the font bold */
+}
+
+.nav-link:hover {
+  color: #007BFF;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px;
+  }
+}
