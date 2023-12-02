@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getDatabase, ref, push, set } from 'firebase/database';
 import { useNavigate } from 'react-router-dom';
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { getAuth, onAuthStateChanged } from 'firebase/auth'; // Import auth functions from Firebase
 import app from '../../firebase';
 import './AddCar.css';
 
@@ -16,6 +17,16 @@ const AddCar = () => {
   const [image, setImage] = useState(null);
 
   const navigate = useNavigate();
+
+  const getCurrentUser = () => {
+    return new Promise((resolve) => {
+      const auth = getAuth(app);
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        unsubscribe(); // Unsubscribe once the user information is obtained
+        resolve(user);
+      });
+    });
+  };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -36,6 +47,15 @@ const AddCar = () => {
         return;
       }
 
+      // Get the current user information
+      const currentUser = await getCurrentUser();
+
+      // Check if currentUser is available
+      if (!currentUser) {
+        console.error('Current user not found');
+        return;
+      }
+
       // Get the reference to the 'cars' node in the database
       const database = getDatabase(app);
       const carsRef = ref(database, 'cars');
@@ -51,7 +71,7 @@ const AddCar = () => {
       // Get the URL of the uploaded image
       const imageUrl = await getDownloadURL(imageRef);
 
-      // Set the car data including the image URL
+      // Set the car data including the image URL and owner ID
       await set(newCarRef, {
         make,
         model,
@@ -60,7 +80,8 @@ const AddCar = () => {
         mileage,
         fuel,
         city,
-        imageUrl, // Include the image URL in the car data
+        imageUrl,
+        ownerId: currentUser.uid, // Include the owner ID in the car data
       });
 
       // Reset the form

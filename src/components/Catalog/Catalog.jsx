@@ -9,6 +9,7 @@ const Catalog = () => {
   const [cars, setCars] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [currentUser, setCurrentUser] = useState(null);
+  const [noCarsFound, setNoCarsFound] = useState(false); // New state to track if no cars are found
 
   const fetchData = async () => {
     try {
@@ -47,13 +48,12 @@ const Catalog = () => {
   };
 
   const handleSearch = () => {
-    // Implement search logic here
-    // Filter the cars based on the entered searchQuery
     const filteredCars = cars.filter((car) =>
       car.make.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    // Update the state with the filtered cars
+    setNoCarsFound(filteredCars.length === 0); // Update noCarsFound state based on the search result
+
     setCars(filteredCars);
   };
 
@@ -89,22 +89,27 @@ const Catalog = () => {
         </div>
       </div>
       <div className="card-list">
-        {cars.map((car) => (
-          <div key={car.id} className="card" style={{ width: '18rem' }}>
-            <img src={car.imageUrl} className="card-img-top" alt={`${car.make} ${car.model}`} />
-            <div className="card-body">
-              <h5 className="card-title">{`${car.make} ${car.model}`}</h5>
-              <p className="card-text">Year: {car.year}</p>
-              <p className="card-text">Price: {car.price} $</p>
-              <Link to={`/details/${car.id}`} className="btn btn-primary">
-                Details
-              </Link>
+        {noCarsFound ? ( // Check if no cars are found
+          <p>No cars found</p>
+        ) : (
+          cars.map((car) => (
+            <div key={car.id} className="card" style={{ width: '18rem' }}>
+              <img src={car.imageUrl} className="card-img-top" alt={`${car.make} ${car.model}`} />
+              <div className="card-body">
+                <h5 className="card-title">{`${car.make} ${car.model}`}</h5>
+                <p className="card-text">Year: {car.year}</p>
+                <p className="card-text">Price: {car.price} $</p>
+                <Link to={`/details/${car.id}`} className="btn btn-primary">
+                  Details
+                </Link>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );
+  
 };
 
 export default Catalog;

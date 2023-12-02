@@ -1,14 +1,15 @@
-// Details.js
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getDatabase, ref, get, remove } from 'firebase/database';
 import { getStorage, ref as storageRef, deleteObject, getDownloadURL } from 'firebase/storage';
+import { getAuth, onAuthStateChanged } from 'firebase/auth'; // Import auth functions from Firebase
 import app from '../../firebase';
 import './Details.css';
 
 const Details = () => {
   const { id } = useParams();
   const [car, setCar] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,7 +31,17 @@ const Details = () => {
       }
     };
 
+    const auth = getAuth(app);
+
+    // Listen for changes to the authentication state
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user); // Update the current user information
+    });
+
     fetchCarDetails();
+
+    // Unsubscribe when the component unmounts
+    return () => unsubscribe();
   }, [id]);
 
   const getImageUrl = async (carId) => {
@@ -44,27 +55,28 @@ const Details = () => {
     }
   };
 
+  const isOwner = currentUser && car && currentUser.uid === car.ownerId;
+
   const handleDelete = async () => {
     const userConfirmed = window.confirm('Are you sure you want to delete this car?');
-  
+
     if (userConfirmed) {
       try {
         const database = getDatabase(app);
         const carRef = ref(database, `cars/${id}`);
         await remove(carRef);
-  
+
         // Delete image from storage
         const storage = getStorage(app);
         const imageRef = storageRef(storage, `carImages/${id}`);
         await deleteObject(imageRef);
-  
+
         navigate('/catalog');
       } catch (error) {
         console.error('Error deleting car:', error.message);
       }
     }
   };
-  
 
   const handleEdit = () => {
     navigate(`/edit/${id}`);
@@ -103,8 +115,12 @@ const Details = () => {
         </div>
         <div className="button-container">
           <button onClick={goBack}>Go Back</button>
-          <button onClick={handleEdit}>Edit</button>
-          <button className='delete-btn' onClick={handleDelete}>Delete</button>
+          {isOwner && (
+            <>
+              <button onClick={handleEdit}>Edit</button>
+              <button className='delete-btn' onClick={handleDelete}>Delete</button>
+            </>
+          )}
         </div>
       </div>
     </div>
