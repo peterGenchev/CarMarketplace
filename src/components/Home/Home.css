@@ -47,6 +47,22 @@
     /* Add transition for a smoother color change on hover or other events */
     transition: color 0.3s ease-in-out;
   }
+
+  .user-text {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    background-color: blanchedalmond;
+    color: red;
+    font-weight: lighter;
+    font-size: larger;
+    flex: 1;
+    margin-left: 10px;
+    padding: 40px 89px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: black;
+    margin-bottom: 5px;
+}
   
   /* Example hover effect */
   .logoName:hover {

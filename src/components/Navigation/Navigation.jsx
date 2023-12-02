@@ -3,16 +3,19 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { signOut, auth } from '../../firebase'; // Updated import
 import './Navigation.css'; // Import the CSS file for styling
 
 function Navigation() {
   const [user] = useAuthState(auth);
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
       await signOut(auth);
+      navigate('/')
     } catch (error) {
       console.error('Logout error:', error.message);
     }
@@ -24,7 +27,7 @@ function Navigation() {
         <Navbar.Brand as={Link} to="/" className="brand-text">CarMarket</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="navbar-toggler" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ml-auto"> {/* Change from 'me-auto' to 'ml-auto' to align to the right */}
+          <Nav className="ms-auto"> {/* Change from 'me-auto' to 'ml-auto' to align to the right */}
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/catalog">Catalog</Nav.Link>
 
@@ -32,7 +35,7 @@ function Navigation() {
             {user ? (
               <>
                 <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
-                <Nav.Link as={Link} to="/addCar">Add Car</Nav.Link>
+                <Nav.Link as={Link} to="/addCar">AddCar</Nav.Link>
                 <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
               </>
             ) : (

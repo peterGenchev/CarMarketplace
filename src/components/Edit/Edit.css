@@ -32,20 +32,31 @@
     justify-content: space-between;
   }
   
-  .edit-buttons button {
-    padding: 10px 16px;
-    border: none;
+  .card button {
+    flex: 1;
+    margin-left: 10px;
+    padding: 10px 15px;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
-  }
+}
   
   .edit-buttons button.cancel-btn {
     background-color: #f44336;
     color: #fff;
   }
+
+  .button-container {
+    flex: 1;
+    margin-left: 10px;
+    padding: 1px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
   
   .edit-buttons button.save-btn {
+    padding: 14px 20px; /* Increase padding for bigger buttons */
     margin-left: 15px;
     background-color: #007bff;
     color: #fff;

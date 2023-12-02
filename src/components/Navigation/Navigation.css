@@ -1,6 +1,8 @@
 /* Customize the styles according to your preference */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;900&family=Montserrat:ital,wght@1,200;1,300;1,400&family=Pacifico&family=Permanent+Marker&family=Poppins:ital@0;1&display=swap');
+
 .container {
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   background-color: transparent;
 }
 
@@ -11,6 +13,20 @@
 
 .navbar-toggler {
   background-color: #007BFF;
+}
+
+.ms-auto.navbar-nav{
+  font-size: large;
+  font-size: 1.5em ;
+  padding-right: auto;
+}
+
+
+
+.brand-text.navbar-brand{
+  font-family:'Pacifico', sans-serif;
+  font-weight: 300;
+  font-size: 2em;
 }
 
 .brand-text {

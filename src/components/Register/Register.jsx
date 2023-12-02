@@ -1,3 +1,4 @@
+// Register.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Register.css';
@@ -7,6 +8,7 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatedPassword, setRepeatedPassword] = useState('');
+  const [username, setUsername] = useState('');
   const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
@@ -21,24 +23,39 @@ const Register = () => {
     setRepeatedPassword(event.target.value);
   };
 
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Check if the password and repeated password match
+  
     if (password !== repeatedPassword) {
       alert("Passwords do not match. Please enter the same password in both fields.");
       return;
     }
 
-    // If passwords match, proceed with registration
-    registerUser(email, password);
-    navigate('/login');
+   
+    registerUser(email, password, username)
+      .then(() => {
+        navigate('/login');
+      })
+      .catch((error) => {
+       
+        console.error('Registration error:', error.message);
+      });
   };
 
   return (
     <div className="register-container">
       <form className="register-form" onSubmit={handleSubmit}>
         <h1>REGISTER</h1>
+        <label>
+          Username:
+          <input type="text" value={username} onChange={handleUsernameChange} />
+        </label>
+        <br />
         <label>
           Email:
           <input type="email" value={email} onChange={handleEmailChange} />

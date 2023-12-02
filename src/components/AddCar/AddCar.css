@@ -1,6 +1,7 @@
 /* AddCar.css */
 
 .add-car-container {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   max-width: 400px;
   margin: 40px auto;
   padding: 20px;

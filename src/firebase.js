@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import { getDatabase, ref, push } from 'firebase/database';
-
+import { useState, useEffect } from 'react';
 
 
 const firebaseConfig = {
@@ -31,6 +31,8 @@ export const registerUser = async (email, password) => {
   }
 };
 
+
+
 const handleAddCar = async () => {
   try {
     // Get the reference to the 'cars' node in the database
@@ -42,5 +44,5 @@ const handleAddCar = async () => {
   }
 };
 
-export { auth, signOut, firestore,  };
+export { auth, signOut, firestore, getAuth };
 export default app;
