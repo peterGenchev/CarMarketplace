@@ -1,55 +1,69 @@
-import React, { useState, useEffect } from 'react';
-import { auth, getDatabase } from '../firebase'; // Import auth and getDatabase
+// import { useEffect, useState } from 'react';
+// import { getAuth, onAuthStateChanged } from 'firebase/auth';
+// import { getDatabase, ref, onValue } from 'firebase/database';
+// import './Profile.css';
 
-import './Profile.css';
+// const Profile = () => {
+//   const [userCars, setUserCars] = useState([]);
+//   const [user, setUser] = useState(null);
 
-const Profile = () => {
-  const { currentUser } = auth; // Use auth from the firebase module
-  const [userCars, setUserCars] = useState([]);
+//   useEffect(() => {
+//     const auth = getAuth();
+//     const database = getDatabase();
 
-  useEffect(() => {
-    const fetchUserCars = async () => {
-      if (currentUser) {
-        try {
-          // Use getDatabase to get the reference to the Realtime Database
-          const database = getDatabase();
-          
-          const carsRef = database.ref('cars').orderByChild('userId').equalTo(currentUser.uid);
-          const carsSnapshot = await carsRef.once('value');
+//     // Set up a listener for authentication state changes
+//     const unsubscribeAuth = onAuthStateChanged(auth, (authUser) => {
+//       if (authUser) {
+//         // If the user is authenticated, update the state
+//         setUser(authUser);
 
-          const carsData = Object.entries(carsSnapshot.val() || {}).map(([id, data]) => ({ id, ...data }));
-          setUserCars(carsData);
-        } catch (error) {
-          console.error('Error fetching user cars:', error.message);
-        }
-      }
-    };
+//         // Fetch user's cars when the component mounts
+//         const userId = authUser.uid;
+//         const userCarsRef = ref(database, `users/${userId}/cars`);
 
-    fetchUserCars();
-  }, [currentUser]);
+//         // Set up a listener for changes in user's cars
+//         const unsubscribeCars = onValue(userCarsRef, (snapshot) => {
+//           const cars = snapshot.val() || {};
+//           const carsList = Object.values(cars);
+//           setUserCars(carsList);
+//         });
 
-  return (
-    <div className="profile-container">
-      <h2>Profile</h2>
-      {currentUser && (
-        <div>
-          <p>Email: {currentUser.email}</p>
-        </div>
-      )}
+//         // Clean up the listener when the component unmounts
+//         return () => {
+//           unsubscribeCars();
+//         };
+//       } else {
+//         // If the user is not authenticated, set user state to null
+//         setUser(null);
+//         setUserCars([]); // Clear userCars when user logs out
+//       }
+//     });
 
-      <h3>Cars Added</h3>
-      {userCars.length > 0 ? (
-        <ul>
-          {userCars.map((car) => (
-            <li key={car.id}>{car.name}</li>
-            // Adjust the property used for the car name based on your data structure
-          ))}
-        </ul>
-      ) : (
-        <p>No cars created yet.</p>
-      )}
-    </div>
-  );
-};
+//     // Clean up the authentication listener when the component unmounts
+//     return () => {
+//       unsubscribeAuth();
+//     };
+//   }, []); // The empty dependency array ensures the effect runs only once on mount
 
-export default Profile;
+//   return (
+//     <div>
+//       {user ? (
+//         <div>
+//           <h2>Welcome, {user.displayName}!</h2>
+//           <h3>Your Cars:</h3>
+//           <ul>
+//             {userCars.map((car) => (
+//               <li key={car.carId}>
+//                 {car.make} {car.model} ({car.year})
+//               </li>
+//             ))}
+//           </ul>
+//         </div>
+//       ) : (
+//         <p>Please sign in to view your profile.</p>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Profile;

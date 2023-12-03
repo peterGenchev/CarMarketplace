@@ -1,14 +1,16 @@
-// Register.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Register.css';
 import { registerUser } from '../../firebase';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatedPassword, setRepeatedPassword] = useState('');
-  const [username, setUsername] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
   const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
@@ -23,27 +25,36 @@ const Register = () => {
     setRepeatedPassword(event.target.value);
   };
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
+  const handleShowModal = (message) => {
+    setModalMessage(message);
+    setShowModal(true);
   };
+
+  const handleCloseModal = () => setShowModal(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-  
     if (password !== repeatedPassword) {
-      alert("Passwords do not match. Please enter the same password in both fields.");
+      handleShowModal("Passwords do not match. Please enter the same password in both fields.");
       return;
     }
 
-   
-    registerUser(email, password, username)
+    registerUser(email, password)
       .then(() => {
-        navigate('/login');
+        handleShowModal("Registration successful!");
+        setTimeout(() => {
+          handleCloseModal();
+          navigate('/login');
+        }, 2000);
       })
       .catch((error) => {
-       
-        console.error('Registration error:', error.message);
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('Email is already in use. Please use a different email address.');
+          handleShowModal("Email is already in use. Please use a different email address.");
+        } else {
+          console.error('Registration error:', error);
+        }
       });
   };
 
@@ -51,10 +62,6 @@ const Register = () => {
     <div className="register-container">
       <form className="register-form" onSubmit={handleSubmit}>
         <h1>REGISTER</h1>
-        <label>
-          Username:
-          <input type="text" value={username} onChange={handleUsernameChange} />
-        </label>
         <br />
         <label>
           Email:
@@ -73,6 +80,16 @@ const Register = () => {
         <br />
         <button type="submit">Register</button>
       </form>
+
+      {/* Error/Success Modal */}
+      <Modal show={showModal} onHide={handleCloseModal} centered>
+        <Modal.Body>{modalMessage}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleCloseModal}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

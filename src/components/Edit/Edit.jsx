@@ -89,6 +89,14 @@ const Edit = () => {
             City:
             <input type="text" name="city" value={editedCar.city} onChange={handleInputChange} />
           </label>
+          <label>
+            Price:
+            <input type="number" name="price" value={editedCar.price} onChange={handleInputChange} />
+          </label>
+          <label>
+            Mileage:
+            <input type="number" name="mileage" value={editedCar.mileage} onChange={handleInputChange} />
+          </label>
           {/* Add more input fields for other properties */}
         </div>
         <div className="button-container">

@@ -3,6 +3,8 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, si
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import { getDatabase , ref, push } from 'firebase/database';
 import { useState, useEffect } from 'react';
+import 'firebase/auth';
+import 'firebase/database';
 
 
 const firebaseConfig = {
@@ -25,10 +27,10 @@ const database = getDatabase(app);
 export const registerUser = async (email, password) => {
   try {
     await createUserWithEmailAndPassword(auth, email, password);
-    await signInWithEmailAndPassword(auth, email, password);
     console.log('Registration successful');
   } catch (error) {
     console.error('Registration error:', error.message);
+    throw error; // Rethrow the error to handle it in the component
   }
 };
 
@@ -49,5 +51,5 @@ export const useAuth = () => {
   return { currentUser };
 };
 
-export { auth, signOut, firestore, getAuth, getDatabase   };
+export { auth, signOut, firestore, getAuth, database   };
 export default app;

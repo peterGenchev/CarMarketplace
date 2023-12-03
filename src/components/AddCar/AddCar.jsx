@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { getDatabase, ref, push, set } from 'firebase/database';
 import { useNavigate } from 'react-router-dom';
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { getAuth, onAuthStateChanged } from 'firebase/auth'; // Import auth functions from Firebase
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import app from '../../firebase';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 import './AddCar.css';
 
 const AddCar = () => {
@@ -13,8 +15,10 @@ const AddCar = () => {
   const [price, setPrice] = useState('');
   const [mileage, setMileage] = useState('');
   const [city, setCity] = useState('');
-  const [fuel, setFuel] = useState('');
+  const [selectedFuel, setSelectedFuel] = useState('');
   const [image, setImage] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
 
   const navigate = useNavigate();
 
@@ -33,17 +37,28 @@ const AddCar = () => {
     setImage(file);
   };
 
+  const handleShowModal = (message) => {
+    setModalMessage(message);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => setShowModal(false);
+
+  const handleFuelChange = (e) => {
+    setSelectedFuel(e.target.value);
+  };
+
   const handleAddCar = async () => {
     try {
       // Validate input
-      if (!make || !model || !year || !price || !image || !fuel || !city || !mileage) {
-        console.error('Please fill in all fields and provide an image');
+      if (!make || !model || !year || !price || !image || !selectedFuel || !city || !mileage) {
+        handleShowModal('Please fill in all fields and provide an image');
         return;
       }
 
       // Validate numeric input
       if (isNaN(parseInt(year, 10)) || isNaN(parseFloat(price))) {
-        console.error('Year and Price must be valid numbers');
+        handleShowModal('Year and Price must be valid numbers');
         return;
       }
 
@@ -52,7 +67,7 @@ const AddCar = () => {
 
       // Check if currentUser is available
       if (!currentUser) {
-        console.error('Current user not found');
+        handleShowModal('Current user not found');
         return;
       }
 
@@ -78,11 +93,14 @@ const AddCar = () => {
         year,
         price,
         mileage,
-        fuel,
+        fuel: selectedFuel,
         city,
         imageUrl,
-        ownerId: currentUser.uid, // Include the owner ID in the car data
+        ownerId: currentUser.uid,
       });
+
+      // Show the success modal
+      handleShowModal('Car added successfully!');
 
       // Reset the form
       setMake('');
@@ -90,14 +108,19 @@ const AddCar = () => {
       setYear('');
       setPrice('');
       setMileage('');
-      setFuel('');
       setCity('');
+      setSelectedFuel('');
       setImage(null);
 
-      console.log('Car added successfully!');
-      navigate('/catalog');
+      // Navigate to the catalog page after a delay
+      setTimeout(() => {
+        handleCloseModal();
+        navigate('/catalog');
+      }, 2000);
     } catch (error) {
       console.error('Error adding car:', error.message);
+      // Show an error modal if needed
+      handleShowModal('Error adding car. Please try again.');
     }
   };
 
@@ -123,7 +146,13 @@ const AddCar = () => {
         </label>
         <label>
           Fuel:
-          <input type="text" value={fuel} onChange={(e) => setFuel(e.target.value)} />
+          <select value={selectedFuel} onChange={handleFuelChange}>
+            <option value="">Select Fuel Type</option>
+            <option value="DIESEL">Diesel</option>
+            <option value="GAZ">Gaz</option>
+            <option value="BENZIN">Benzin</option>
+            <option value="ELECTRICITY">Electricity</option>
+          </select>
         </label>
         <label>
           Mileage:
@@ -140,6 +169,16 @@ const AddCar = () => {
         <button type="button" onClick={handleAddCar}>
           Add Car
         </button>
+
+        {/* Success/Error Modal */}
+        <Modal show={showModal} onHide={handleCloseModal} centered>
+          <Modal.Body>{modalMessage}</Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={handleCloseModal}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </form>
     </div>
   );
