@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
-import { getDatabase, ref, push } from 'firebase/database';
+import { getDatabase , ref, push } from 'firebase/database';
 import { useState, useEffect } from 'react';
 
 
@@ -19,6 +19,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const firestore = getFirestore(app);
+const database = getDatabase(app); 
 
 
 export const registerUser = async (email, password) => {
@@ -31,18 +32,22 @@ export const registerUser = async (email, password) => {
   }
 };
 
+// Use onAuthStateChanged to update the currentUser state when the authentication state changes
+export const useAuth = () => {
+  const [currentUser, setCurrentUser] = useState(null);
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+    });
 
-const handleAddCar = async () => {
-  try {
-    // Get the reference to the 'cars' node in the database
-    const database = getDatabase();
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
-    // ... rest of the code remains unchanged
-  } catch (error) {
-    console.error('Error adding car:', error.message);
-  }
+  return { currentUser };
 };
 
-export { auth, signOut, firestore, getAuth };
+export { auth, signOut, firestore, getAuth, getDatabase   };
 export default app;

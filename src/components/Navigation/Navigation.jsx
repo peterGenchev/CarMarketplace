@@ -3,22 +3,24 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { signOut, auth } from '../../firebase'; // Updated import
+import { getAuth } from '../../firebase'; // Updated import
 import './Navigation.css'; // Import the CSS file for styling
 
 function Navigation() {
+  const auth = getAuth();
   const [user] = useAuthState(auth);
-  const navigate = useNavigate();
 
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      navigate('/')
-    } catch (error) {
-      console.error('Logout error:', error.message);
-    }
+  const handleLogout = () => {
+    auth
+      .signOut()
+      .then(() => {
+        // Clear the user from local storage (if needed)
+        localStorage.removeItem('currentUser');
+      })
+      .catch((error) => {
+        console.error('Logout error:', error.message);
+      });
   };
 
   return (
