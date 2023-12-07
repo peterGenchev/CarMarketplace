@@ -7,12 +7,14 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getAuth } from '../../firebase'; // Updated import
+import { useNavigate } from 'react-router-dom';
 import './Navigation.css'; // Import the CSS file for styling
 
 function Navigation() {
   const auth = getAuth();
   const [user] = useAuthState(auth);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     auth
@@ -22,6 +24,7 @@ function Navigation() {
         localStorage.removeItem('currentUser');
         // Close the modal after successful logout
         setShowLogoutModal(false);
+        navigate('/')
       })
       .catch((error) => {
         console.error('Logout error:', error.message);

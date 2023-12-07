@@ -41,10 +41,10 @@
     color: #fcfafa;
     border-color: aliceblue;
   
-    /* Add text shadow for a subtle effect */
+   
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   
-    /* Add transition for a smoother color change on hover or other events */
+    
     transition: color 0.3s ease-in-out;
   }
 
@@ -64,7 +64,7 @@
     margin-bottom: 5px;
 }
   
-  /* Example hover effect */
+  
   .logoName:hover {
-    color: #ff6347; /* Change to a different color on hover */
+    color: #ff6347; 
   }

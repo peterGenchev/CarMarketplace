@@ -97,7 +97,11 @@ const Edit = () => {
             Mileage:
             <input type="number" name="mileage" value={editedCar.mileage} onChange={handleInputChange} />
           </label>
-          {/* Add more input fields for other properties */}
+          <label>
+            Contact:
+            <input type="number" name="contactUser" value={editedCar.contactUser} onChange={handleInputChange} />
+          </label>
+         
         </div>
         <div className="button-container">
           <button onClick={goBack}>Cancel</button>

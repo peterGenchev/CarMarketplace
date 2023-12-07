@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getDatabase, ref, get, remove } from 'firebase/database';
 import { getStorage, ref as storageRef, deleteObject, getDownloadURL } from 'firebase/storage';
-import { getAuth, onAuthStateChanged } from 'firebase/auth'; // Import auth functions from Firebase
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import app from '../../firebase';
 import './Details.css';
-
+ 
 const Details = () => {
   const { id } = useParams();
   const [car, setCar] = useState(null);
@@ -33,14 +33,14 @@ const Details = () => {
 
     const auth = getAuth(app);
 
-    // Listen for changes to the authentication state
+    
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user); // Update the current user information
+      setCurrentUser(user); 
     });
 
     fetchCarDetails();
 
-    // Unsubscribe when the component unmounts
+    
     return () => unsubscribe();
   }, [id]);
 
@@ -66,7 +66,7 @@ const Details = () => {
         const carRef = ref(database, `cars/${id}`);
         await remove(carRef);
 
-        // Delete image from storage
+       
         const storage = getStorage(app);
         const imageRef = storageRef(storage, `carImages/${id}`);
         await deleteObject(imageRef);
@@ -111,7 +111,10 @@ const Details = () => {
           <p>
             <span className="info">Mileage:</span> <span>{car.mileage} km</span>
           </p>
-          {/* Add more paragraphs for other properties */}
+          <p>
+            <span className="info">Contact:</span> <span> {car.contactUser}</span>
+          </p>
+         
         </div>
         <div className="button-container">
           <button onClick={goBack}>Go Back</button>

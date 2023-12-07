@@ -34,18 +34,18 @@ const Register = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+  
     if (password !== repeatedPassword) {
       handleShowModal("Passwords do not match. Please enter the same password in both fields.");
       return;
     }
-
+  
     registerUser(email, password)
       .then(() => {
         handleShowModal("Registration successful!");
         setTimeout(() => {
           handleCloseModal();
-          navigate('/login');
+          navigate('/login'); 
         }, 2000);
       })
       .catch((error) => {
@@ -57,6 +57,7 @@ const Register = () => {
         }
       });
   };
+  
 
   return (
     <div className="register-container">
@@ -81,7 +82,6 @@ const Register = () => {
         <button type="submit">Register</button>
       </form>
 
-      {/* Error/Success Modal */}
       <Modal show={showModal} onHide={handleCloseModal} centered>
         <Modal.Body>{modalMessage}</Modal.Body>
         <Modal.Footer>

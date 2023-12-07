@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getDatabase, ref, get, remove } from 'firebase/database';
 import { getStorage, ref as storageRef, getDownloadURL } from 'firebase/storage';
-import app from '../../firebase';
+import app, { useAuth } from '../../firebase'; 
 import './Catalog.css';
 
 const Catalog = () => {
   const [cars, setCars] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [currentUser, setCurrentUser] = useState(null);
-  const [noCarsFound, setNoCarsFound] = useState(false); // New state to track if no cars are found
+  const { currentUser } = useAuth(); 
+  const [noCarsFound, setNoCarsFound] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -26,6 +26,7 @@ const Catalog = () => {
           })
         );
         setCars(carsArray);
+        setNoCarsFound(carsArray.length === 0);
       }
     } catch (error) {
       console.error('Error fetching cars:', error.message);
@@ -52,7 +53,7 @@ const Catalog = () => {
       car.make.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    setNoCarsFound(filteredCars.length === 0); // Update noCarsFound state based on the search result
+    setNoCarsFound(filteredCars.length === 0);
 
     setCars(filteredCars);
   };
@@ -62,9 +63,8 @@ const Catalog = () => {
   };
 
   const handleClearSearch = () => {
-    // Reset the search query and fetch all cars again
     setSearchQuery('');
-    fetchData(); // Call the fetchData function here
+    fetchData();
   };
 
   return (
@@ -89,7 +89,7 @@ const Catalog = () => {
         </div>
       </div>
       <div className="card-list">
-        {noCarsFound ? ( // Check if no cars are found
+        {noCarsFound ? (
           <p>No cars found</p>
         ) : (
           cars.map((car) => (
@@ -99,9 +99,11 @@ const Catalog = () => {
                 <h5 className="card-title">{`${car.make} ${car.model}`}</h5>
                 <p className="card-text">Year: {car.year}</p>
                 <p className="card-text">Price: {car.price} $</p>
-                <Link to={`/details/${car.id}`} className="btn btn-primary">
-                  Details
-                </Link>
+                {currentUser ? (
+                  <Link to={`/details/${car.id}`} className="btn btn-primary">
+                    Details
+                  </Link>
+                ) : null}
               </div>
             </div>
           ))
@@ -109,7 +111,6 @@ const Catalog = () => {
       </div>
     </div>
   );
-  
 };
 
 export default Catalog;

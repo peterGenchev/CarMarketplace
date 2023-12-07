@@ -27,7 +27,6 @@ const Login = () => {
       await signInWithEmailAndPassword(auth, email, password);
       setLoginSuccess(true);
 
-      // Redirect to home page after successful login
       navigate('/');
     } catch (error) {
       console.error('Login error:', error.message);

@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
-import { getDatabase , ref, push } from 'firebase/database';
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+import { getDatabase } from 'firebase/database';
 import { useState, useEffect } from 'react';
 import 'firebase/auth';
 import 'firebase/database';
@@ -21,7 +21,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const firestore = getFirestore(app);
-const database = getDatabase(app); 
+const database = getDatabase(app);
 
 
 export const registerUser = async (email, password) => {
@@ -30,11 +30,10 @@ export const registerUser = async (email, password) => {
     console.log('Registration successful');
   } catch (error) {
     console.error('Registration error:', error.message);
-    throw error; // Rethrow the error to handle it in the component
+    throw error; 
   }
 };
 
-// Use onAuthStateChanged to update the currentUser state when the authentication state changes
 export const useAuth = () => {
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -51,5 +50,5 @@ export const useAuth = () => {
   return { currentUser };
 };
 
-export { auth, signOut, firestore, getAuth, database   };
+export { auth, signOut, firestore, getAuth, database,onAuthStateChanged  };
 export default app;

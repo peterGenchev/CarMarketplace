@@ -17,6 +17,7 @@ const AddCar = () => {
   const [city, setCity] = useState('');
   const [selectedFuel, setSelectedFuel] = useState('');
   const [image, setImage] = useState(null);
+  const [contactUser, setContactUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
 
@@ -26,7 +27,7 @@ const AddCar = () => {
     return new Promise((resolve) => {
       const auth = getAuth(app);
       const unsubscribe = onAuthStateChanged(auth, (user) => {
-        unsubscribe(); // Unsubscribe once the user information is obtained
+        unsubscribe(); 
         resolve(user);
       });
     });
@@ -50,43 +51,43 @@ const AddCar = () => {
 
   const handleAddCar = async () => {
     try {
-      // Validate input
-      if (!make || !model || !year || !price || !image || !selectedFuel || !city || !mileage) {
+      
+      if (!make || !model || !year || !price || !image || !selectedFuel || !city || !mileage || !contactUser) {
         handleShowModal('Please fill in all fields and provide an image');
         return;
       }
 
-      // Validate numeric input
+    
       if (isNaN(parseInt(year, 10)) || isNaN(parseFloat(price))) {
         handleShowModal('Year and Price must be valid numbers');
         return;
       }
 
-      // Get the current user information
+      
       const currentUser = await getCurrentUser();
 
-      // Check if currentUser is available
+      
       if (!currentUser) {
         handleShowModal('Current user not found');
         return;
       }
 
-      // Get the reference to the 'cars' node in the database
+      
       const database = getDatabase(app);
       const carsRef = ref(database, 'cars');
 
-      // Push the new car data to the 'cars' node in the database
+      
       const newCarRef = push(carsRef);
 
-      // Upload the image to Firebase Storage
+     
       const storage = getStorage(app);
       const imageRef = storageRef(storage, `carImages/${newCarRef.key}`);
       await uploadBytes(imageRef, image);
 
-      // Get the URL of the uploaded image
+      
       const imageUrl = await getDownloadURL(imageRef);
 
-      // Set the car data including the image URL and owner ID
+      
       await set(newCarRef, {
         make,
         model,
@@ -95,31 +96,33 @@ const AddCar = () => {
         mileage,
         fuel: selectedFuel,
         city,
+        contactUser,
         imageUrl,
         ownerId: currentUser.uid,
       });
 
-      // Show the success modal
+    
       handleShowModal('Car added successfully!');
 
-      // Reset the form
+      
       setMake('');
       setModel('');
       setYear('');
       setPrice('');
       setMileage('');
       setCity('');
+      setContactUser('');
       setSelectedFuel('');
       setImage(null);
 
-      // Navigate to the catalog page after a delay
+      
       setTimeout(() => {
         handleCloseModal();
         navigate('/catalog');
       }, 2000);
     } catch (error) {
       console.error('Error adding car:', error.message);
-      // Show an error modal if needed
+     
       handleShowModal('Error adding car. Please try again.');
     }
   };
@@ -161,6 +164,10 @@ const AddCar = () => {
         <label>
           City:
           <input type="text" value={city} onChange={(e) => setCity(e.target.value)} />
+        </label>
+        <label>
+          Contact:
+          <input type="number" value =  {contactUser} onChange={(e) => setContactUser(e.target.value)}  />
         </label>
         <label>
           Image:

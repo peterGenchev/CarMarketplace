@@ -12,7 +12,7 @@
 }
 
 .catalog-container {
-  height: 100vh; /* Set the container height to 100% of the viewport height */
-  overflow-y: auto; /* Enable vertical scrolling if the content exceeds the viewport height */
-  /* Add any other necessary styles for your catalog container */
+  height: 100vh; 
+  overflow-y: auto; 
+  
 }

@@ -56,7 +56,7 @@
   }
   
   .edit-buttons button.save-btn {
-    padding: 14px 20px; /* Increase padding for bigger buttons */
+    padding: 14px 20px; 
     margin-left: 15px;
     background-color: #007bff;
     color: #fff;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getAuth } from '../../firebase'; // Adjust the import path based on your project structure
+import { getAuth } from '../../firebase'; 
 
 import './Home.css';
 
@@ -8,7 +8,7 @@ const Home = () => {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    // Try to get the user from localStorage
+    
     const storedUser = localStorage.getItem('currentUser');
 
     if (storedUser) {
@@ -16,8 +16,7 @@ const Home = () => {
     } else {
       const unsubscribe = auth.onAuthStateChanged((user) => {
         setCurrentUser(user);
-
-        // Save the user to localStorage
+      
         localStorage.setItem('currentUser', JSON.stringify(user));
       });
 
@@ -26,8 +25,6 @@ const Home = () => {
       };
     }
   }, [auth]);
-
-  
 
   return (
     <div className="home-page">
