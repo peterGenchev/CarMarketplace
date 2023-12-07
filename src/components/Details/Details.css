@@ -26,12 +26,19 @@
 }
 
 .card img {
-  width: 100%;
-  max-width: 500px;
-  height: auto;
+  width: 100%; /* Make the image take up 100% of its container */
+  max-width: 500px; /* Set a maximum width for the image */
+  max-height: 300px; /* Maintain the aspect ratio */
   margin: 20px 0;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 .card .details-info {
@@ -58,7 +65,7 @@ span {
 
 .card .button-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Align buttons with space between them */
   margin-top: 20px;
 }
 

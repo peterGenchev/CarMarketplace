@@ -1,13 +1,10 @@
-/* Catalog.css */
-
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #d1c8c8; 
-  text-shadow: 4px 4px 8px #8b8b8b; 
+  background-color: #d1c8c8;
+  text-shadow: 4px 4px 8px #8b8b8b;
   border-color: #010a03;
-
 }
 
 .btn.btn-primary {
@@ -17,7 +14,7 @@ body {
 .container {
   max-width: 800px;
   margin: 20px auto;
-  background: rgba(255, 255, 255, 0.9); /* Adjust the alpha value (0.9 for 90% opacity) */
+  background: rgba(255, 255, 255, 0.9); 
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -50,17 +47,14 @@ input {
 
 .btn-primary,
 .btn-secondary {
-  display: inline-block; 
+  display: inline-block;
   margin-top: 10px;
   padding: 10px 16px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   align-items: center;
-  
 }
-
-
 
 .btn-primary {
   background-color: #061e07;
@@ -131,23 +125,15 @@ input {
   background-color: #0056b3;
 }
 
-.search-container {
+.spinner-border {
+  width: 5rem;
+  height: 5rem;
+}
+
+.spinner-container {
+  color: white;
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.input-container {
-  flex: 1;
-  margin-right: 10px;
-}
-
-.btn-container {
-  display: flex;
-  flex-shrink: 0;
-}
-
-.btn-container button {
-  margin-right: 10px; /* Adjust the margin between buttons */
+  height: 100vh;
 }

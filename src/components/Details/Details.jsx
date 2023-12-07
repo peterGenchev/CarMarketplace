@@ -94,7 +94,9 @@ const Details = () => {
     <div className="card-container">
       <div className="card">
         <h1>{`${car.make} ${car.model}`}</h1>
+        <div className='image'>
         <img src={car.imageUrl} alt={`${car.make} ${car.model}`} />
+        </div>
         <div className="details-info">
           <p>
             <span className="info">Year:</span> <span>{car.year}</span>
