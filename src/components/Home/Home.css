@@ -1,70 +1,43 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;900&family=Montserrat:ital,wght@1,200;1,300;1,400&family=Pacifico&family=Poppins:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;900&family=Montserrat:ital,wght@1,200;1,300;1,400&family=Pacifico&family=Permanent+Marker&family=Poppins:ital@0;1&display=swap');
 
 .home-page {
-    position: relative;
-    height: 100vh;
-    overflow: hidden;
-  }
-  
-  .welcome-message {
-    position: absolute;
-    margin-left: 20px; 
-    top: 50%;
-    left: 0; 
-    transform: translateY(-50%);
-    text-align: left; 
-    color: rgb(255, 252, 252);
-  }
-  
-  .welcome-message h1 {
-    font-size: 6em;
-    margin-bottom: 10px;
-  }
-  
-  .welcome-message p {
-    font-family: 'Pacifico', sans-serif; 
-    font-size: 2.5em;
-    margin: 0;
-  }
-
-  .special-text {
-    font-family: 'Pacifico', sans-serif; 
-    font-size: 2em;
-    font-weight: bold;
-    color:  #fcfafa; 
-  }
-
-  .logoName {
-    font-family: 'Pacifico', sans-serif; 
-    font-size: 2em;
-    color: #fcfafa;
-    border-color: aliceblue;
-  
-   
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  
-    
-    transition: color 0.3s ease-in-out;
-  }
-
-  .user-text {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    background-color: blanchedalmond;
-    color: red;
-    font-weight: lighter;
-    font-size: larger;
-    flex: 1;
-    margin-left: 10px;
-    padding: 40px 89px;
-    border-radius: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    border: black;
-    margin-bottom: 5px;
+  text-align: center;
+  padding: 50px;
 }
-  
-  
-  .logoName:hover {
-    color: #ff6347; 
+
+.welcome-message {
+  animation: fadeIn 2s ease-in-out;
+}
+
+.special-text {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: #f4f5f5;
+  font-size: 110px;
+  text-shadow: 14px 14px 18px #000; 
+}
+
+.welcome{
+  color: #f4f5f5;
+  font-size: 30px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  text-shadow: 14px 14px 18px #000; 
+}
+
+.logoName {
+  font-family:'Pacifico', sans-serif;
+  font-weight:lighter;
+  font-size: 50px;
+  color: #faf6f5;
+  text-shadow: 14px 14px 18px #000; /* black border */
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
   }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

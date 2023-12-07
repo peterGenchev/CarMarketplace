@@ -58,8 +58,8 @@
   .edit-buttons button.save-btn {
     padding: 14px 20px; 
     margin-left: 15px;
-    background-color: #007bff;
-    color: #fff;
+    background-color: #97999a;
+    color: #e31313;
   }
   
   .edit-buttons button:hover {

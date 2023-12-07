@@ -27,11 +27,12 @@ const AddCar = () => {
     return new Promise((resolve) => {
       const auth = getAuth(app);
       const unsubscribe = onAuthStateChanged(auth, (user) => {
-        unsubscribe(); 
+        unsubscribe();
         resolve(user);
       });
     });
   };
+  
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
