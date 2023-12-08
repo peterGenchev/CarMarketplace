@@ -16,6 +16,10 @@
   text-shadow: 14px 14px 18px #000; 
 }
 
+.footer-container {
+  position: fixed;
+}
+
 .welcome{
   color: #f4f5f5;
   font-size: 30px;

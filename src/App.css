@@ -11,6 +11,11 @@
   overflow-y: auto;
 }
 
+.footer {
+
+  background-color: red;
+}
+
 .catalog-container {
   height: 100vh; 
   overflow-y: auto; 
