@@ -21,7 +21,13 @@
   padding-right: auto;
 }
 
+.brand-logo {
 
+height: 70px;
+width: 140px;
+border: solid rgb(32, 30, 30);
+border-radius:1.5em;
+}
 
 .brand-text.navbar-brand{
   font-family:'Pacifico', sans-serif;

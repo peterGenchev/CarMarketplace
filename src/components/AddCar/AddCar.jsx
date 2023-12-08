@@ -148,7 +148,7 @@ const AddCar = () => {
           Price:
           <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} />
         </label>
-        <label>
+        <label className='fuel'>
           Fuel:
           <select value={selectedFuel} onChange={handleFuelChange}>
             <option value="">Select Fuel Type</option>

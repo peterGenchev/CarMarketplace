@@ -38,7 +38,15 @@ function Navigation() {
     <>
       <Navbar expand="lg" className="transparent-navbar">
         <Container>
-          <Navbar.Brand as={Link} to="/" className="brand-text">CarMarket</Navbar.Brand>
+          {/* Replace "CarMarket" text with an image logo */}
+        <Navbar.Brand as={Link} to="/">
+          {/* Use the Image component or img tag for your logo */}
+          {/* Example using Image component */}
+          {/* <Image src="/path-to-your-logo.png" alt="CarMarket Logo" className="brand-logo" /> */}
+          
+          {/* Example using img tag */}
+          <img src="./src/assets/logo2.png" alt="CarMarket Logo" className="brand-logo" />
+        </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" className="navbar-toggler" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
