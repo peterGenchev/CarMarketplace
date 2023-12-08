@@ -12,13 +12,13 @@ const About = () => {
       </p>
       <p>
         Our mission is to provide valuable information and services to our users.
-        We are passionate about [your mission or topic].
+        We are passionate about [Drive your dream].
       </p>
       <h2>Meet the Team</h2>
       <ul>
-        <li>Ivan Georgiev - Team lead </li>
-        <li>Peter Petrov - Manager</li>
-        <li>Tanya Miroslavova - call center</li>
+        <li>Ivan Georgiev - +359898112233 - Team lead  </li>
+        <li>Peter Petrov - +359898000233 - Manager</li>
+        <li>Tanya Miroslavova - +359898772233 - call center</li>
         
       </ul>
       <p>

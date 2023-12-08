@@ -1,0 +1,23 @@
+/* NotFound.css */
+
+.not-found-container {
+    color: white;
+    text-align: center;
+    padding: 50px;
+    animation: fadeIn 1s ease-out; 
+  }
+  
+  h1 {
+    color: #f2efef;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  

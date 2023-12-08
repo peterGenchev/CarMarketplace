@@ -9,7 +9,8 @@
 }
 
 .details {
-  margin-top: 8em;
+ margin-top: 10px;
+ margin-bottom: 20px;
   max-width: 1000px;
   width: 80%;
   background: #fff;
@@ -66,7 +67,7 @@ span {
 
 .details .button-container {
   display: flex;
-  justify-content: space-between; /* Align buttons with space between them */
+  justify-content: space-between; 
   margin-top: 20px;
   
 }

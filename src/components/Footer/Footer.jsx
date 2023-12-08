@@ -1,13 +1,10 @@
+import React from "react"
 
-import React from 'react';
-import './Footer.css';
+const Footer = () => <footer>
+    <div className="footer-one">© 2020 Copyright:
+        <a href=""> </a>
+    </div>
 
-const Footer = () => {
-  return (
-    <footer className="footer-container">
-      <p>&copy; made by Nostyone: 2023 Car market. All rights reserved.</p>
-    </footer>
-  );
-};
+</footer>
 
-export default Footer;
+export default Footer
