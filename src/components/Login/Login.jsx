@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link  } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -52,6 +52,12 @@ const Login = () => {
 
         {loginError && <p className="error-message">{loginError}</p>}
         {loginSuccess && <p className="success-message">Login successful!</p>}
+        <p>
+          Not registered?{' '}
+          <Link to="/register" className="register-link">
+            Click here to register
+          </Link>
+        </p>
       </form>
     </div>
   );

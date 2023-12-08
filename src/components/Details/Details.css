@@ -8,7 +8,8 @@
   height: 70vh;
 }
 
-.card {
+.details {
+  margin-top: 8em;
   max-width: 1000px;
   width: 80%;
   background: #fff;
@@ -21,11 +22,11 @@
   align-items: center;
 }
 
-.card h1 {
+.details h1 {
   color: #333;
 }
 
-.card img {
+.details img {
   width: 100%; /* Make the image take up 100% of its container */
   max-width: 500px; /* Set a maximum width for the image */
   max-height: 300px; /* Maintain the aspect ratio */
@@ -41,11 +42,11 @@
   border-radius: 8px;
 }
 
-.card .details-info {
+.details .details-info {
   text-align: left;
 }
 
-.card .detail-row p {
+.details .detail-row p {
   display: flex;
   flex-basis: calc(20% - 10px);
   margin-bottom: 20px;
@@ -57,38 +58,40 @@ span {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.card .info {
+.details .info {
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-weight: normal;
   font-size: medium;
 }
 
-.card .button-container {
+.details .button-container {
   display: flex;
   justify-content: space-between; /* Align buttons with space between them */
   margin-top: 20px;
+  
 }
 
-.card button {
+.details button {
   flex: 1;
   margin-left: 10px;
-  padding: 1px 15px;
+  padding: 11px 15px;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
+
 }
 
-.card button:hover {
+.details button:hover {
   background-color: #0554a8;
 }
 
-.card button.delete-btn {
+.details button.delete-btn {
   background-color: #f44336;
   color: #fff;
   margin-left: 10px;
   transition: background-color 0.3s;
 }
 
-.card button.delete-btn:hover {
+.details button.delete-btn:hover {
   background-color: #d32f2f;
 }

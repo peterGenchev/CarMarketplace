@@ -70,7 +70,7 @@ const Edit = () => {
 
   return (
     <div className="edit-container">
-      <div className="card">
+      <div className="edit">
         <h1>Edit {`${editedCar.make} ${editedCar.model}`}</h1>
         <div className="edit-form">
           <label>

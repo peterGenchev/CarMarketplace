@@ -92,7 +92,7 @@ const Details = () => {
 
   return (
     <div className="card-container">
-      <div className="card">
+      <div className="details">
         <h1>{`${car.make} ${car.model}`}</h1>
         <div className='image'>
         <img src={car.imageUrl} alt={`${car.make} ${car.model}`} />

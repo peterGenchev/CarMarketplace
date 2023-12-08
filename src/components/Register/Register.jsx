@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './Register.css';
 import { registerUser } from '../../firebase';
 import Modal from 'react-bootstrap/Modal';
@@ -80,6 +80,13 @@ const Register = () => {
         </label>
         <br />
         <button type="submit">Register</button>
+        <p>
+          You have an account?{' '}
+          <Link to="/login" className="register-link">
+            Click here to login
+          </Link>
+        </p>
+        
       </form>
 
       <Modal show={showModal} onHide={handleCloseModal} centered>
