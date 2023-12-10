@@ -10,13 +10,13 @@ import Catalog from './components/Catalog/Catalog';
 import Details from './components/Details/Details';
 import EditCar from './components/Edit/Edit';
 import Page404 from './components/Page404/Page404';
-import Footer from './components/Footer/Footer';
+
+
 
 function App() {
   return (
     <div className="background-image">
       <Navigation />
-
       <div className="content">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -30,8 +30,6 @@ function App() {
           <Route path="*" element={<Page404 />} />
         </Routes>
       </div>
-
-      <Footer />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getDatabase, ref, get, remove } from 'firebase/database';
+import { getDatabase, ref, get } from 'firebase/database';
 import { getStorage, ref as storageRef, getDownloadURL } from 'firebase/storage';
 import app, { useAuth } from '../../firebase';
 import Spinner from 'react-bootstrap/Spinner';
@@ -31,7 +31,7 @@ const Catalog = () => {
         setNoCarsFound(carsArray.length === 0);
       }
 
-      setLoading(false); // Set loading to false once data is fetched
+      setLoading(false);
     } catch (error) {
       console.error('Error fetching cars:', error.message);
     }

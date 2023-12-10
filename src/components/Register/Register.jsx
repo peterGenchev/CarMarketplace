@@ -45,7 +45,7 @@ const Register = () => {
         handleShowModal("Registration successful!");
         setTimeout(() => {
           handleCloseModal();
-          navigate('/login'); 
+          navigate('/'); 
         }, 2000);
       })
       .catch((error) => {

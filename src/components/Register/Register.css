@@ -1,10 +1,10 @@
-/* Register.css */
+
 
 .register-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 50h;
   }
   
   .register-form {
@@ -18,7 +18,7 @@
   label {
     display: block;
     margin-bottom: 10px;
-  }
+  } 
   
   input {
     width: 100%;

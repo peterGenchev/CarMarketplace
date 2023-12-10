@@ -7,16 +7,6 @@
   background-image: url('/src/assets/bmw1.jpg');
   background-size: cover;
   background-position: center;
-  filter: brightness(1); 
+  filter: brightness(1);
   overflow-y: auto;
-}
-
-.footer-one {
-  background-color: red;
-}
-
-.catalog-container {
-  height: 100vh; 
-  overflow-y: auto; 
-  
 }

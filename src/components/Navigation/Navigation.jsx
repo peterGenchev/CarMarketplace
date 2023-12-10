@@ -6,9 +6,9 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { getAuth } from '../../firebase'; // Updated import
+import { getAuth } from '../../firebase'; 
 import { useNavigate } from 'react-router-dom';
-import './Navigation.css'; // Import the CSS file for styling
+import './Navigation.css'; 
 
 function Navigation() {
   const auth = getAuth();
@@ -20,9 +20,9 @@ function Navigation() {
     auth
       .signOut()
       .then(() => {
-        // Clear the user from local storage (if needed)
+        
         localStorage.removeItem('currentUser');
-        // Close the modal after successful logout
+     
         setShowLogoutModal(false);
         navigate('/')
       })
@@ -64,7 +64,7 @@ function Navigation() {
         </Container>
       </Navbar>
 
-      {/* Logout Modal */}
+
       <Modal show={showLogoutModal} onHide={handleCloseLogoutModal}>
         <Modal.Header closeButton>
           <Modal.Title>Logout Confirmation</Modal.Title>
